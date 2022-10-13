@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<a th:href="@{/create}"> create new coin  </a>-->
+<!--<br>-->
+<!--<a th:href="@{/result}"> request All Coins  </a>-->
+<!--<br>-->
+
+<form th:action="@{/create}" th:object="${createCoin}" th:method="post">
+
+    <p style="border:2px solid #555; box-shadow:3px 3px 5px #999; width: 200px; text-align:center;  margin:20px; padding:20px;">
+
+        <label for="coinRank"> coinRank</label>
+        <br>
+        <input type="text" id="coinRank" value="coinRank" placeholder="Coin rank" th:field="*{coinRank}">
+        <br>
+
+        <label for="coinId"> coinId</label>
+        <br>
+        <input type="text" id="coinId" value="coinId" placeholder="example bitcoin, dogecoin" th:field="*{coinId}">
+        <br>
+
+        <label for="coinName"> coinName</label>
+        <br>
+        <input type="text" id="coinName" value="coinName" placeholder="example Bitcoin, Dogecoin" th:field="*{coinName}">
+        <br>
+
+        <label for="coinSymbol"> coinSymbol</label>
+        <br>
+        <input type="text" id="coinSymbol" value="coinSymbol" placeholder="example btc, doge" th:field="*{coinSymbol}">
+        <br>
+
+        <label for="coinPair"> coinPair</label>
+        <br>
+        <input type="text" id="coinPair" value="coinPair" placeholder="example USD, RUB" th:field="*{coinPair}">
+        <br>
+
+        <label for="dateAth"> dateAth</label>
+        <br>
+        <input type="text" id="dateAth" value="dateAth" placeholder="Date ATH" th:field="*{dateAth}">
+        <br>
+
+        <label for="currentCourse"> currentCourse</label>
+        <br>
+        <input type="text" id="currentCourse" value="currentCourse" placeholder="Current course" th:field="*{current_price}">
+        <br>
+
+        <label for="maxPrice"> maxPrice</label>
+        <br>
+        <input type="text" id="maxPrice" value="maxPrice" placeholder="Max price" th:field="*{maxPrice}">
+        <br>
+
+        <label for="maxPrice24h"> maxPrice24h</label>
+        <br>
+        <input type="text" id="maxPrice24h" value="maxPrice24h" placeholder="Max price 24h" th:field="*{maxPrice24h}">
+        <br>
+
+        <label for="minimumPrice24h"> minimumPrice24h</label>
+        <br>
+        <input type="text" id="minimumPrice24h" value="minimumPrice24h" placeholder="Minimum price 24h" th:field="*{minimumPrice24h}">
+        <br>
+
+        <label for="priceChange24h"> priceChange24h</label>
+        <br>
+        <input type="text" id="priceChange24h" value="priceChange24h" placeholder="Price change 24h" th:field="*{changingPrice24h}">
+        <br>
+
+        <label for="priceChangeInPercentage24h"> priceChangeInPercentage24h</label>
+        <br>
+        <input type="text" id="priceChangeInPercentage24h" value="priceChangeInPercentage24h" placeholder="Price change in percentage 24h" th:field="*{changingPriceInPercentage24h}">
+        <br>
+
+        <label for="coinImage"> coinImage</label>
+        <br>
+        <input type="text" id="coinImage" value="coinImage" placeholder="Coin image" th:field="*{coinImage}">
+        <br>
+
+        <label for="coinUrl"> coinUrl</label>
+        <br>
+        <input type="text" id="coinUrl" value="coinUrl" placeholder="Coin url" th:field="*{coinUrl}">
+        <br>
+
+        <label for="sparkLine7d"> sparkLine7d</label>
+        <br>
+        <input type="text" id="sparkLine7d" value="sparkLine7d" placeholder="Spark line 7d" th:field="*{sparkLine7d}">
+        <br>
+
+
+        <input type="submit" value="Create Coin">
+</form>
+<br>
+<br>
+<br>
+<!--<form th:action="@{/resultCoinById}" th:method="post" th:object="${getCoin}">-->
+<!--    <label for=getCoin> Enter Id Coin</label>-->
+<!--    <br>-->
+<!--    <input type="text" id="getCoin" value="getCoin" placeholder="example bitcoin, dogecoin" th:field="*{coinId}">-->
+
+<!--    <input type="submit" value="Get Coin">-->
+<!--</form>-->
+<form th:action="@{/resultCoinById}" th:method="post" th:object="${getCoin}">
+    <p style="border:2px solid #555; box-shadow:3px 3px 5px #999; width: 200px; text-align:center;  margin:20px; padding:20px;">
+        <label for=getCoin> input Id Coin</label>
+        <br>
+        <input type="text" id="getCoin" value="getCoin" placeholder="example bitcoin, dogecoin" th:field="*{coinId}">
+
+        <input type="submit" value="Get Coin">
+</form>
+
+
+<!--String coinId, String symbol, String coinName, String coinPair-->
+
+<!--<form th:action="@{/}" th:object="${user}" th:method="post">-->
+<!--    <label for="name"> print name </label>-->
+<!--    <br>-->
+<!--    <input type="text" id="name" value="name" placeholder="text" th:field="*{name}">-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <label for="surname" > print surname </label>-->
+<!--    <br>-->
+<!--    <input placeholder="text" type="text" id="surname" value="surname" th:field="*{surname}">-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <input type="submit" value="send">-->
+
+<!--</form>-->
+
+<br>
+
+<form method="get" action="/getAllCoins">
+    <button type="submit">Get All Coins</button>
+</form>
+
+<br>
+
+<form method="get" action="/deleteAllCoins">
+    <button type="submit">Delete All Coins</button>
+</form>
+<br>
+<br>
+<br>
+<form method="get" action="/writeFile">
+    <button type="submit">Write new coins from file</button>
+</form>
+
+
+</body>
+</html>
