@@ -30,29 +30,38 @@ bootJar {
 }
 
 dependencies {
+    //spring
     implementation "org.springframework.boot:spring-boot-devtools:${springDevtools}"
     implementation "org.springframework.boot:spring-boot-starter:${springStarter}"
     implementation "org.springframework.boot:spring-boot-starter-web:${springStarter}"
     implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootStarterActuator}"
     implementation "org.springframework.boot:spring-boot-starter-log4j2:${springStarter}"
     implementation "org.telegram:telegrambots-spring-boot-starter:${telegrambotsSpring}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springStarter}"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springDataJpa}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springStarterTest}"
+    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+
+    //lombok
     annotationProcessor "org.projectlombok:lombok:${lombok}"
     compileOnly "org.projectlombok:lombok:${lombok}"
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springDataJpa}"
+
+    //bd
     implementation "org.postgresql:postgresql:${postgresql}"
+    implementation "org.liquibase:liquibase-core:${liquibaseVersion}"
 
-    testImplementation "org.springframework.boot:spring-boot-starter-test:${springStarterTest}"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiter}"
-    implementation "io.micrometer:micrometer-registry-prometheus:${micrometerRegistryPrometheus}"
-
-    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
-    implementation 'com.github.philipinho:CoinGecko-Java:-SNAPSHOT'
-
+    //mapStruct
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapStruct}"
     implementation "org.mapstruct:mapstruct:${mapStruct}"
 
-//    liquibaseRuntime "org.liquibase:liquibase-core:${liquibasePluginVersion}"
-    implementation "org.liquibase:liquibase-core:${liquibaseVersion}"
+    //for create jwt token
+    implementation "io.jsonwebtoken:jjwt-api:${jjwt}"
+    runtimeOnly "io.jsonwebtoken:jjwt-impl:${jjwt}"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jjwt}"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiter}"
+    implementation "io.micrometer:micrometer-registry-prometheus:${micrometerRegistryPrometheus}"
+    implementation 'com.github.philipinho:CoinGecko-Java:-SNAPSHOT'
 }
 
 test {

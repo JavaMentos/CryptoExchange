@@ -44,3 +44,10 @@ scheduling:
 logging:
   level:
     root: info
+
+jwt:
+  secret: 1f6g1sd5f1g56s1d56fg1sd56fg89sd4bgf1h9m1utyi1k9df1bsd65
+  lifeTime: 1H
+
+secret:
+  phrase: javaMentos

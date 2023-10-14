@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 @Entity
 @Getter
@@ -41,9 +40,4 @@ public class Coin {
     private String coinImage;
     @Column(name = "coin_url", length = 512)
     private String coinUrl;
-
-
-    @Transient
-    public static ArrayList<Coin> coins = new ArrayList<>();
-
 }

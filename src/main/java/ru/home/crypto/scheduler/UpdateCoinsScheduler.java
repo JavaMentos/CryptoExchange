@@ -13,6 +13,7 @@ public class UpdateCoinsScheduler {
 
     @Scheduled(initialDelayString = ("${scheduling.initialDelay}"), fixedDelayString = "${scheduling.fixedDelay}")
     void updateCoins() {
-        coinUpdateService.updateCoins();
+
+//        coinUpdateService.updateCoins();
     }
 }
