@@ -24,7 +24,6 @@ springBoot {
     mainClass = 'ru.home.crypto.CryptoExchangeApplication'
 }
 
-// Замените блок jar на этот блок bootJar
 bootJar {
     archiveBaseName = 'CryptoExchangeApplication'
     archiveVersion = '1.0.0'

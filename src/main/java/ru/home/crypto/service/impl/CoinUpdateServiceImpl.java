@@ -14,6 +14,8 @@ import ru.home.crypto.service.CoinUpdateService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -27,49 +29,43 @@ public class CoinUpdateServiceImpl implements CoinUpdateService {
         Ping ping = coinGeckoApiClient.ping();
         coinGeckoApiClient.shutdown();
         if (ping.getGeckoSays().equals("(V3) To the Moon!")) {
-            priceUpdate(coinGeckoApiClient);
+            prepareCoinsAndSave(coinGeckoApiClient);
         }
         coinGeckoApiClient.shutdown();
     }
 
 
-    private void priceUpdate(CoinGeckoApiClient coinGeckoApiClient) {
-
-        //количество страниц
-        for (int i = 0; i < 26; i++) {
-
-            List<CoinMarkets> coinMarkets = coinGeckoApiClient.getCoinMarkets(Currency.USD, "", "", 200, i, false, "");
-
-            updatePriceInBD(coinMarkets);
-        }
-    }
-
-    private void updatePriceInBD(List<CoinMarkets> coinMarkets) {
-
+    private void prepareCoinsAndSave(CoinGeckoApiClient coinGeckoApiClient) {
         List<Coin> coins = new ArrayList<>();
 
-        for (CoinMarkets coinMarket : coinMarkets) {
-            coins.add(coinMapper.coinMarketsToCoin(coinMarket));
+        //количество страниц, берем 1000 монет
+        for (int i = 0; i < 5; i++) {
+            List<CoinMarkets> coinMarkets = coinGeckoApiClient
+                    .getCoinMarkets(Currency.USD, "", "", 200, i, false, "");
 
-            System.out.println();
+            coins.addAll(coinMarkets.stream()
+                    .map(coinMapper::coinMarketsToCoin)
+                    .toList());
+
+            sleep();
         }
+        saveAndUpdateCoins(coins);
     }
 
-//    private String formattedTime(String date) {
-//        String date = "2011-08-11T01:23:45.678Z";
+    private void saveAndUpdateCoins(List<Coin> coins) {
 
-//        DateTimeFormatter dft2 = DateTimeFormatter
-//                .ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-//        LocalDateTime localDateTime = LocalDateTime.parse(date, dft2);
-//
-//        return DateTimeFormatter.ofPattern("yyyy/MM/dd - HH:mm:ss").format(localDateTime);
-//
-// Преобразование строки в LocalDateTime
-//        LocalDateTime dateTime = LocalDateTime.parse(input, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        List<Coin> uniqCoins = coins.stream()
+                .collect(Collectors.toMap(Coin::getCoinId, Function.identity(), (oldValue, newValue) -> newValue))
+                .values().stream().toList();
 
-// Получение даты в нужном формате
-//        String formattedDate = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        coinRepository.saveAllAndFlush(uniqCoins);
+    }
 
-//        System.out.println(formattedDate); // Выводит: 2021-11-10
-//    }
+    private void sleep() {
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
 }

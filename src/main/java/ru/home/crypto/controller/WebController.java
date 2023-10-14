@@ -43,7 +43,7 @@ public class WebController {
 
     @GetMapping("/getAllCoins")
     public String result(Model model) {
-        model.addAttribute("allCoins",coinRepository.getAllCoins());
+//        model.addAttribute("allCoins",coinRepository.getAllCoins());
 //        System.out.println(coinRepository.getAllCoins());
 
 
@@ -97,11 +97,10 @@ public class WebController {
     @GetMapping("/deleteAllCoins")
     public String deleteAll(Model model) {
 
-        coinRepository.deleteTableCoins();
-        coinRepository.updateGeneratedValue();
-        model.addAttribute("allCoins",coinRepository.getAllCoins());
+//        coinRepository.deleteTableCoins();
+//        model.addAttribute("allCoins",coinRepository.getAllCoins());
 //        Coin.coins.clear();
-        System.out.println(coinRepository.getAllCoins());
+//        System.out.println(coinRepository.getAllCoins());
 
         return "deleteAllCoins";
     }
@@ -131,7 +130,7 @@ public class WebController {
     public String acceptCoin(@ModelAttribute("getCoin") CheckCoinId coinId, Model model){
         System.out.println("Вывод acceptCoin: "+coinId.getCoinId());
 
-        model.addAttribute("coinById", coinRepository.getCoin(coinId.getCoinId()));
+//        model.addAttribute("coinById", coinRepository.getCoin(coinId.getCoinId()));
 
         return "resultCoinById";
     }

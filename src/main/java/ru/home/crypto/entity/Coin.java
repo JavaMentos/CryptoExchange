@@ -3,10 +3,8 @@ package ru.home.crypto.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Entity
@@ -15,12 +13,10 @@ import java.util.ArrayList;
 @Table(name = "coins_usd")
 public class Coin {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ID;
-    @Column(name = "coin_rank")
-    private long coinRank;
     @Column(name = "coin_id", length = 50)
     private String coinId;
+    @Column(name = "coin_rank")
+    private long coinRank;
     @Column(name = "coin_name", length = 50)
     private String coinName;
     @Column(name = "coin_symbol", length = 25)
@@ -41,11 +37,10 @@ public class Coin {
     private BigDecimal changingPrice24h;
     @Column(name = "changing_price_in_percentage24h")
     private BigDecimal changingPriceInPercentage24h;
-    @Column(name = "coin_image", length=512)
+    @Column(name = "coin_image", length = 512)
     private String coinImage;
-    @Column(name = "coin_url", length=512)
+    @Column(name = "coin_url", length = 512)
     private String coinUrl;
-
 
 
     @Transient

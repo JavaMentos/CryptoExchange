@@ -1,0 +1,46 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /api/v1/crypto-exchange
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  endpoint:
+    health:
+      group:
+        db:
+          include:
+            - db
+          show-components: always
+          show-details: always
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    hikari: # пулом соединений HikariCP, который проверяет соединение с базой данных
+      max-lifetime: 60000 # максимального времени жизни соединения 20 секунд
+    url: jdbc:postgresql://${DB_URL}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+    show-sql: false
+  liquibase:
+    change-log: classpath:config/liquibase/master.yaml
+    liquibase-schema: public
+    enabled: true
+
+scheduling:
+  initialDelay: PT1M
+  fixedDelay: PT2M
+
+logging:
+  level:
+    root: info
