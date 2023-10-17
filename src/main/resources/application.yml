@@ -31,7 +31,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: update
-    show-sql: false
+    show-sql: true
   liquibase:
     change-log: classpath:config/liquibase/master.yaml
     liquibase-schema: public
@@ -43,11 +43,8 @@ scheduling:
 
 logging:
   level:
-    root: info
+    root: debug
 
 jwt:
   secret: 1f6g1sd5f1g56s1d56fg1sd56fg89sd4bgf1h9m1utyi1k9df1bsd65
   lifeTime: 1H
-
-secret:
-  phrase: javaMentos

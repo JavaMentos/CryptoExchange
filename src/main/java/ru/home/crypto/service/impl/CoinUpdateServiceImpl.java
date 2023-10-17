@@ -6,7 +6,7 @@ import com.litesoftwares.coingecko.domain.Coins.CoinMarkets;
 import com.litesoftwares.coingecko.domain.Ping;
 import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.home.crypto.entity.Coin;
 import ru.home.crypto.mapper.CoinMapper;
 import ru.home.crypto.repository.CoinRepository;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class CoinUpdateServiceImpl implements CoinUpdateService {
 

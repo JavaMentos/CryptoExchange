@@ -40,7 +40,8 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springStarter}"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springDataJpa}"
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springStarterTest}"
-    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+    implementation "jakarta.persistence:jakarta.persistence-api:${jakartaPersistence}"
+    implementation "org.springframework.boot:spring-boot-starter-security:${springStarter}"
 
     //lombok
     annotationProcessor "org.projectlombok:lombok:${lombok}"
@@ -59,9 +60,9 @@ dependencies {
     runtimeOnly "io.jsonwebtoken:jjwt-impl:${jjwt}"
     runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jjwt}"
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiter}"
     implementation "io.micrometer:micrometer-registry-prometheus:${micrometerRegistryPrometheus}"
     implementation 'com.github.philipinho:CoinGecko-Java:-SNAPSHOT'
+
 }
 
 test {

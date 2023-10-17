@@ -9,10 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Endpoints {
     public static final String PATH_DIVIDER = "/";
-    public static final String CREATE_TOKEN = "create_token";
-    public static final String TOKEN = "token";
-    public static final String COINS = "coins";
-    public static final String CREATE_TOKEN_FULL_PATH = PATH_DIVIDER + CREATE_TOKEN;
-    public static final String TOKEN_FULL_PATH = PATH_DIVIDER + TOKEN;
-    public static final String COIN_FULL_PATH = PATH_DIVIDER + COINS;
+    public static final String AUTH = "auth";
+    public static final String LOGIN = "login";
+    public static final String EXCHANGE = "exchange";
+    public static final String USERS = "users";
+    public static final String ALL_COINS = "all_coins";
+    public static final String LOGIN_FULL_PATH = PATH_DIVIDER + LOGIN;
+    public static final String AUTH_FULL_PATH = PATH_DIVIDER + AUTH;
+    public static final String EXCHANGE_FULL_PATH = PATH_DIVIDER + EXCHANGE;
+    public static final String USERS_FULL_PATH = PATH_DIVIDER + USERS;
+    public static final String ALL_COINS_FULL_PATH = PATH_DIVIDER + ALL_COINS;
 }
