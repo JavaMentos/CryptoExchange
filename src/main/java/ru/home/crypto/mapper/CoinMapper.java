@@ -1,22 +1,18 @@
 package ru.home.crypto.mapper;
 
 import com.litesoftwares.coingecko.domain.Coins.CoinMarkets;
-import org.mapstruct.BeforeMapping;
 import org.mapstruct.Mapper;
+import java.time.LocalDateTime;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import ru.home.crypto.entity.Coin;
 
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
-
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = {LocalDateTime.class})
 public interface CoinMapper {
     @Mapping(source = "marketCapRank", target = "coinRank")
     @Mapping(source = "id", target = "coinId")
     @Mapping(source = "name", target = "coinName")
     @Mapping(source = "symbol", target = "coinSymbol")
+    @Mapping(target = "lastUpdatedAt", expression = "java(LocalDateTime.now())")
     @Mapping(source = "currentPrice", target = "currentPrice")
     @Mapping(source = "ath", target = "athPrice")
     @Mapping(source = "athDate", dateFormat = "dd.MM.yyyy", target = "dateOfAthPrice")

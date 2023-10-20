@@ -35,4 +35,3 @@ build/
 /gradlew.bat
 /src/main/resources/application.yml
 /src/main/resources/log4j2.properties
-/.env

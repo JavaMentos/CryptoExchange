@@ -8,4 +8,4 @@ databaseChangeLog:
   - include:
       file: config/liquibase/changelog/04_create_table_user_roles.sql
   - include:
-      file: config/liquibase/changelog/data/user_roles.sql
+      file: config/liquibase/changelog/data/01_insert_user_roles.sql

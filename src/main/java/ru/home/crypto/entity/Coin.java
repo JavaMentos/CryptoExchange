@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -20,10 +21,13 @@ public class Coin {
     private String coinName;
     @Column(name = "coin_symbol", length = 25)
     private String coinSymbol;
+    @Column(name = "last_updated_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime lastUpdatedAt;
     @Column(name = "current_price")
     private BigDecimal currentPrice;
-    @Column(name = "Ath_price")
-    private BigDecimal AthPrice;
+    @Column(name = "ath_price")
+    private BigDecimal athPrice;
     @Column(name = "date_of_Ath_price")
     private String dateOfAthPrice;
     @Column(name = "percentage_change_from_ath")

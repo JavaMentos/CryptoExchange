@@ -32,7 +32,7 @@ import static ru.home.crypto.config.constant.RequestPath.*;
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
-    private final String ROLE = "ADMIN";
+    private static final String ROLE = "ADMIN";
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

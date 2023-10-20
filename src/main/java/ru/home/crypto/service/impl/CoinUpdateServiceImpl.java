@@ -58,7 +58,7 @@ public class CoinUpdateServiceImpl implements CoinUpdateService {
                 .collect(Collectors.toMap(Coin::getCoinId, Function.identity(), (oldValue, newValue) -> newValue))
                 .values().stream().toList();
 
-        coinRepository.saveAllAndFlush(uniqCoins);
+        coinRepository.saveAll(uniqCoins);
     }
 
     private void sleep() {

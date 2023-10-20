@@ -42,6 +42,7 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springStarterTest}"
     implementation "jakarta.persistence:jakarta.persistence-api:${jakartaPersistence}"
     implementation "org.springframework.boot:spring-boot-starter-security:${springStarter}"
+    implementation "org.hibernate.validator:hibernate-validator:${hibernateValidator}"
 
     //lombok
     annotationProcessor "org.projectlombok:lombok:${lombok}"

@@ -37,8 +37,7 @@ public class JwtTokenProvider {
      */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
+        return new BCryptPasswordEncoder();
     }
 
     /**
@@ -119,9 +118,7 @@ public class JwtTokenProvider {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
 
-            if (claims.getBody().getExpiration().before(new Date())) {
-                return false;
-            }
+            if (claims.getBody().getExpiration().before(new Date())) return false;
 
             return true;
         } catch (JwtException | IllegalArgumentException e) {

@@ -6,5 +6,4 @@ import ru.home.crypto.entity.Coin;
 
 @Repository
 public interface CoinRepository extends JpaRepository<Coin, Long> {
-
 }

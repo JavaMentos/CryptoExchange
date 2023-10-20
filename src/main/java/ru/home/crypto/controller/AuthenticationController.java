@@ -1,5 +1,6 @@
 package ru.home.crypto.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,7 +17,7 @@ import ru.home.crypto.entity.security.User;
 import ru.home.crypto.security.jwt.JwtTokenProvider;
 import ru.home.crypto.service.UserService;
 
-import static ru.home.crypto.controller.constant.Endpoints.AUTH_FULL_PATH;
+import static ru.home.crypto.controller.constant.Endpoints.AUTH_PATH;
 import static ru.home.crypto.controller.constant.Endpoints.LOGIN_FULL_PATH;
 
 /**
@@ -28,7 +29,7 @@ import static ru.home.crypto.controller.constant.Endpoints.LOGIN_FULL_PATH;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = AUTH_FULL_PATH)
+@RequestMapping(value = AUTH_PATH)
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
@@ -39,7 +40,7 @@ public class AuthenticationController {
 
 
     @PostMapping(LOGIN_FULL_PATH)
-    public AuthenticationResponseDTO login(@RequestBody AuthenticationRequestDTO requestDto) {
+    public AuthenticationResponseDTO login(@Valid @RequestBody AuthenticationRequestDTO requestDto) {
         try {
             String username = requestDto.username();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.password()));
@@ -50,7 +51,6 @@ public class AuthenticationController {
             }
 
             String token = jwtTokenProvider.createToken(username, user.getRoles());
-
 
             return new AuthenticationResponseDTO(username, token);
         } catch (AuthenticationException e) {

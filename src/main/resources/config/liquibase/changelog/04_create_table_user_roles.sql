@@ -9,10 +9,10 @@ CREATE TABLE IF NOT EXISTS public.user_roles
 
 ALTER TABLE user_roles
     ADD CONSTRAINT fk_user_roles_user
-        FOREIGN KEY (user_id) REFERENCES public.users(id)
+        FOREIGN KEY (user_id) REFERENCES public.users (id)
             ON DELETE CASCADE;
 
 ALTER TABLE user_roles
     ADD CONSTRAINT fk_user_roles_roles
-        FOREIGN KEY (role_id) REFERENCES public.roles(id)
+        FOREIGN KEY (role_id) REFERENCES public.roles (id)
             ON DELETE CASCADE;

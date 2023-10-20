@@ -16,4 +16,4 @@ public class CryptoExchangeApplication {
 
 //TODO Настроить глобальный обработчик эксепшинов Advice
 //TODO Начать документировать методы и класс
-//TODO Настроить Security, спрятать CoinController за security
+//TODO Начать прикручивать кафку
