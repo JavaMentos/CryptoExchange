@@ -12,8 +12,8 @@ import static ru.home.crypto.controller.constant.Endpoints.*;
 @RequiredArgsConstructor
 public class ExchangeController {
 
-    @GetMapping(GET_COIN_FULL_PATH)
-    public String getAllCoins() {
+    @GetMapping(COIN_FULL_PATH)
+    public String getCoin() {
 
         return "Okey";
     }

@@ -2,6 +2,7 @@ package ru.home.crypto.security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,18 +10,24 @@ import org.springframework.stereotype.Service;
 import ru.home.crypto.entity.security.User;
 import ru.home.crypto.security.jwt.JwtUser;
 import ru.home.crypto.security.jwt.JwtUserFactory;
-import ru.home.crypto.service.UserService;
+import ru.home.crypto.service.AuthenticationService;
+
+import java.util.Objects;
 
 /**
  * Класс JwtUserDetailsService предоставляет средства для поиска пользователей в системе.
  * Реализует стандартный интерфейс Spring Security UserDetailsService.
  */
-@RequiredArgsConstructor
 @Service
 @Slf4j
 public class JwtUserDetailsService implements UserDetailsService {
 
-    private final UserService userService;
+    private AuthenticationService authenticationService;
+
+    @Autowired
+    public void setAuthenticationService(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
 
     /**
      * Ищет пользователя по его имени. Если пользователь не найден, выбрасывает исключение.
@@ -31,9 +38,9 @@ public class JwtUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByUsername(username);
+        User user = authenticationService.findByUsername(username);
 
-        if (user == null) {
+        if (Objects.isNull(user)) {
             throw new UsernameNotFoundException("User with username: " + username + " not found");
         }
 
