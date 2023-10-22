@@ -4,6 +4,7 @@ import com.litesoftwares.coingecko.domain.Coins.CoinMarkets;
 import org.mapstruct.Mapper;
 import java.time.LocalDateTime;
 import org.mapstruct.Mapping;
+import ru.home.crypto.dto.CoinExportDTO;
 import ru.home.crypto.entity.Coin;
 
 @Mapper(componentModel = "spring", imports = {LocalDateTime.class})
@@ -24,4 +25,6 @@ public interface CoinMapper {
     @Mapping(source = "image", target = "coinImage")
     @Mapping(target = "coinUrl", expression = "java(\"https://www.coingecko.com/en/coins/\" + coinMarkets.getId())")
     Coin coinMarketsToCoin(CoinMarkets coinMarkets);
+
+    CoinExportDTO coinToCoinExportDTO(Coin coin);
 }

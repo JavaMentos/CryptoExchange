@@ -1,7 +1,6 @@
 package ru.home.crypto.security;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,7 +18,7 @@ import java.util.Objects;
  * Реализует стандартный интерфейс Spring Security UserDetailsService.
  */
 @Service
-@Slf4j
+@Log4j2
 public class JwtUserDetailsService implements UserDetailsService {
 
     private AuthenticationService authenticationService;

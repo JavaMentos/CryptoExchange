@@ -5,7 +5,7 @@ import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,7 +22,7 @@ import java.util.*;
  * Класс JwtTokenProvider отвечает за генерацию, валидацию JWT токенов
  * и их использование для аутентификации пользователей.
  */
-@Slf4j
+@Log4j2
 @Component
 @RequiredArgsConstructor
 public class JwtTokenProvider {

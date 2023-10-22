@@ -1,7 +1,6 @@
 package ru.home.crypto.service.impl;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,7 +16,7 @@ import ru.home.crypto.security.jwt.JwtTokenProvider;
 import ru.home.crypto.service.AuthenticationService;
 
 @Service
-@Slf4j
+@Log4j2
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
