@@ -1,13 +1,11 @@
 package ru.home.crypto.service.impl;
 
-import com.litesoftwares.coingecko.CoinGeckoApiClient;
 import com.litesoftwares.coingecko.constant.Currency;
 import com.litesoftwares.coingecko.domain.Coins.CoinMarkets;
-import com.litesoftwares.coingecko.domain.Ping;
-import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.home.crypto.entity.Coin;
+import ru.home.crypto.external.gecko.CoinGeckoApiClientWrapper;
 import ru.home.crypto.mapper.CoinMapper;
 import ru.home.crypto.repository.CoinRepository;
 import ru.home.crypto.service.CoinUpdateService;
@@ -23,25 +21,21 @@ public class CoinUpdateServiceImpl implements CoinUpdateService {
 
     private final CoinRepository coinRepository;
     private final CoinMapper coinMapper;
+    private final CoinGeckoApiClientWrapper coinGeckoApiClient;
 
     public void updateCoins() {
-        CoinGeckoApiClient coinGeckoApiClient = new CoinGeckoApiClientImpl();
-        Ping ping = coinGeckoApiClient.ping();
-        coinGeckoApiClient.shutdown();
-        if (ping.getGeckoSays().equals("(V3) To the Moon!")) {
-            prepareCoinsAndSave(coinGeckoApiClient);
-        }
-        coinGeckoApiClient.shutdown();
+        if (coinGeckoApiClient.isAvailable()) prepareCoinsAndSave();
+        coinGeckoApiClient.shootDawn();
     }
 
 
-    private void prepareCoinsAndSave(CoinGeckoApiClient coinGeckoApiClient) {
+    private void prepareCoinsAndSave() {
         List<Coin> coins = new ArrayList<>();
-
+        String usd = Currency.USD;
+        coinGeckoApiClient.start();
         //количество страниц, берем 1000 монет
         for (int i = 0; i < 5; i++) {
-            List<CoinMarkets> coinMarkets = coinGeckoApiClient
-                    .getCoinMarkets(Currency.USD, "", "", 200, i, false, "");
+            List<CoinMarkets> coinMarkets = coinGeckoApiClient.getCoinMarkets(usd, 200, i);
 
             coins.addAll(coinMarkets.stream()
                     .map(coinMapper::coinMarketsToCoin)
@@ -49,6 +43,7 @@ public class CoinUpdateServiceImpl implements CoinUpdateService {
 
             sleep();
         }
+        coinGeckoApiClient.shootDawn();
         saveAndUpdateCoins(coins);
     }
 
